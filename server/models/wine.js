@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Comment = require('../models/comment');
+const Comment = require('./comment');
 
 const wineSchema = new Schema({
   winery: String,
