@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Wine = require('../models/wine');
+const Wine = require('./wine');
 
 const userSchema = new Schema ({
   firstName: String,
   lastName: String,
-  favorites: [{ type: Wine.WineSchema }],
+  favorites: [{ type: Schema.Types.ObjectId, ref: "wine" }],
   email: String
 })
 
-const UserModel = mongoose.model('user', userSchema);
+const User = mongoose.model('user', userSchema);
 
-module.exports = {
-  UserModel, 
-  User: userSchema};
+module.exports = User;
