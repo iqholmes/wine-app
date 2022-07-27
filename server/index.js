@@ -1,15 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const allRoutes = require('./routes/main');
 
 mongoose.connect('mongodb://localhost/wine-app', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-mongoose.connection.on('connected', () => console.log('Connected'));
-mongoose.connection.on('error', () => console.log('Connection failed with - ',err));
 
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -21,8 +23,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(allRoutes);
+
 
 //server setup
 app.listen(8000, () => {
